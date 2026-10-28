@@ -212,3 +212,32 @@ app.delete(
         )
     }
 )
+
+//ROUTE tidak ditemukan
+
+app.use((req, res) => {
+    return errorResponse(
+        res,
+        'Endpoint tidak ditemukan',
+        404
+    )
+})
+
+//GLOBAL ERROR RESPONSE
+app.use((err, req, res, next) => {
+    console.error(err)
+
+    if (res.headerSent) {
+        return next(err)
+    }
+
+    return errorResponse(
+        res,
+        'Terjadi kesalahan pada server',
+        500
+    )
+})
+
+app.listen(port, () => {
+    console.log(`App running on port ${port}.`)
+})
