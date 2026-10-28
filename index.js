@@ -96,7 +96,7 @@ function validateBody(schema){
 
 //MIDDLEWARE UNTUK VALIDASI PARAMETER ID
 
-function validatParams(schema){
+function validateParams(schema){
     return(req, res, next) => {
         const{ error, value} = schema.validate(req.params)
 
@@ -190,7 +190,7 @@ app.put(
 //DELETE (Hapus data)
 app.delete(
     '/biodata/:id',
-    validatParams(idSchema),
+    validateParams(idSchema),
     async (req, res) => {
         const { id } = req.params;
 
