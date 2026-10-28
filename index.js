@@ -112,7 +112,6 @@ function validateParams(schema){
         )
     }
 
-    req.body = value
     next()
     }
 }
@@ -154,17 +153,16 @@ app.post(
 
 //PUT (Update Data)
 app.put(
-    '/biodata/:id', 
+    '/biodata/:id',
     validateParams(idSchema),
     validateBody(biodataSchema.fork(
         ['nama', 'nim', 'kelas'],
         field => field.required()
-
     ).fork(['id'], field => field.forbidden())),
     async (req, res) => {
-        const { id } = req.params;
-        const { nama, nim, kelas } = req.body;
-
+        const { id } = req.params
+        const { nama, nim, kelas } = req.body
+        
         const result = await pool.query(
             `UPDATE biodata
             SET nama = $1, nim = $2, kelas = $3
