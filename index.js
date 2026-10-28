@@ -77,4 +77,17 @@ function validateBody(schema){
             allowUnknown:false,
         })
     }
+    if (error) {
+        return errorResponse(
+            res,
+            'validasi input gagal',
+            400,
+            error.details.map(item => ({
+                field: item.path.join('-'),
+                message: item.message,
+            }))
+        )
+    }
+    req.body = value;
+    next();
 }
