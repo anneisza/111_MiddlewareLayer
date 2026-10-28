@@ -146,7 +146,7 @@ app.post(
 
         return successResponse(
             res,
-            'Dta berhasil ditambahkan',
+            'Data berhasil ditambahkan',
             result.rows[0],
             201
         )
